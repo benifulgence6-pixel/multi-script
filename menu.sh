@@ -1,17 +1,17 @@
 #!/bin/bash
 
 #=========================================================
-#        KEVIN TECH MULTI SCRIPT - PREMIUM EDITION
+#              BENI VPS PANEL - PREMIUM EDITION
 #=========================================================
 
-BASE="/etc/kevintech"
+BASE="/etc/benivps"
 CONFIG="$BASE/config.conf"
 
 #=========================================================
 # Verificar configuración
 #=========================================================
 
-[[ ! -f "$CONFIG" ]] && {
+ ! -f "$CONFIG"  && {
     clear
     echo ""
     echo "❌ No se encontró config.conf"
@@ -49,7 +49,7 @@ else
     SSL_TUNNEL="OFF"
 fi
 # Detectar Cloudflare
-if [[ -n "$SERVER_DOMAIN" ]]; then
+if  -n "$SERVER_DOMAIN" ; then
     if dig +short NS "$SERVER_DOMAIN" | grep -qi cloudflare; then
         CLOUDFLARE_STATUS="ON"
     else
@@ -88,7 +88,7 @@ bottomline() {
 }
 
 status() {
-    [[ "$1" == "ON" ]] && echo -e "${GREEN}🟢 ON${RESET}" || echo -e "${RED}🔴 OFF${RESET}"
+     "$1" == "ON"  && echo -e "${GREEN}🟢 ON${RESET}" || echo -e "${RED}🔴 OFF${RESET}"
 }
 
 #=========================================================
@@ -186,26 +186,26 @@ PROTO4=""
 PROTO5=""
 PROTO6=""
 
-[[ "$OPENSSH" == "ON" ]]     && PROTO1+="🟢 OpenSSH        Puerto 22"
-[[ "$SYSTEMDNS" == "ON" ]]   && PROTO1+="\n🟢 SystemDNS      Puerto 53"
+ "$OPENSSH" == "ON"      && PROTO1+="🟢 OpenSSH        Puerto 22"
+ "$SYSTEMDNS" == "ON"    && PROTO1+="\n🟢 SystemDNS      Puerto 53"
 
-[[ "$ZIPVPN" == "ON" ]]      && PROTO2+="\n🟢 ZIP VPN"
+ "$ZIPVPN" == "ON"       && PROTO2+="\n🟢 ZIP VPN"
 
-[[ "$DROPBEAR" == "ON" ]]    && PROTO3+="🟢 Dropbear       Puerto 90"
-[[ "$SSL" == "ON" || "$SSL_TUNNEL" == "ON" ]] && PROTO3+="\n🟢 SSL/TLS        Puerto 443"
+ "$DROPBEAR" == "ON"     && PROTO3+="🟢 Dropbear       Puerto 90"
+ "$SSL" == "ON" || "$SSL_TUNNEL" == "ON"  && PROTO3+="\n🟢 SSL/TLS        Puerto 443"
 
-[[ "$BADVPN" == "ON" ]]      && PROTO4+="🟢 BadVPN         7200 / 7300"
-[[ "$UDP_CUSTOM" == "ON" ]]  && PROTO4+="\n🟢 UDP Custom     Puerto 36712"
+ "$BADVPN" == "ON"       && PROTO4+="🟢 BadVPN         7200 / 7300"
+ "$UDP_CUSTOM" == "ON"   && PROTO4+="\n🟢 UDP Custom     Puerto 36712"
 
-[[ "$SLOWDNS" == "ON" ]]     && PROTO5+="🟢 SlowDNS        Puerto 53"
+ "$SLOWDNS" == "ON"      && PROTO5+="🟢 SlowDNS        Puerto 53"
 
-[[ "$XRAY" == "ON" ]] && \
+ "$XRAY" == "ON"  && \
 PROTO6+="🟢 V2Ray / Xray      Puerto 443"
 
 clear
 
 topline
-printf "${WHITE}║             ⚡ KEVIN TECH MULTI SCRIPT PREMIUM ⚡             ║${RESET}\n"
+printf "${WHITE}║                 ⚡ BENI VPS PANEL PREMIUM ⚡                  ║${RESET}\n"
 printf "${GRAY}║                  Premium Edition v2.0                       ║${RESET}\n"
 bottomline
 
@@ -270,7 +270,7 @@ echo -e "${CYAN}┌──────────────── 🚀 PROTOCO
 for LISTA in "$PROTO1" "$PROTO2" "$PROTO3" "$PROTO4" "$PROTO5" "$PROTO6"
 do
 
-    [[ -n "$LISTA" ]] || continue
+     -n "$LISTA"  || continue
 
     while IFS= read -r LINEA
     do
@@ -324,7 +324,7 @@ echo -e "${CYAN}╚════════════════════�
 echo ""
 
 echo -e "${GRAY}╭──────────────────────────────────────────────────────────────╮${RESET}"
-echo -e "${GRAY}│${WHITE}     Kevin Tech Tutorials © Premium Edition v2.0             ${GRAY}│${RESET}"
+echo -e "${GRAY}│${WHITE}         Beni VPS Panel © Premium Edition v2.0               ${GRAY}│${RESET}"
 echo -e "${GRAY}╰──────────────────────────────────────────────────────────────╯${RESET}"
 
 echo ""
@@ -345,7 +345,7 @@ echo -e "${WHITE}║                 👥 CONTROL DE USUARIOS                   
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-if [[ -f "$BASE/usuarios/menu.sh" ]]; then
+if  -f "$BASE/usuarios/menu.sh" ; then
 
     bash "$BASE/usuarios/menu.sh"
 
@@ -370,11 +370,11 @@ echo -e "${WHITE}║                    🚀 OPTIMIZAR VPS                      
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-if [[ -f "$BASE/herramientas/optimizar.sh" ]]; then
+if  -f "$BASE/herramientas/optimizar.sh" ; then
 
     bash "$BASE/herramientas/optimizar.sh"
 
-elif [[ -f "$HOME/multi-script/herramientas/optimizar.sh" ]]; then
+elif  -f "$HOME/multi-script/herramientas/optimizar.sh" ; then
 
     mkdir -p "$BASE/herramientas"
 
@@ -405,11 +405,11 @@ echo -e "${WHITE}║                  🌐 CAMBIAR DOMINIO                      
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-if [[ -f "$BASE/herramientas/change-domain" ]]; then
+if  -f "$BASE/herramientas/change-domain" ; then
 
     bash "$BASE/herramientas/change-domain"
 
-elif [[ -f "$HOME/multi-script/herramientas/change-domain" ]]; then
+elif  -f "$HOME/multi-script/herramientas/change-domain" ; then
 
     mkdir -p "$BASE/herramientas"
 
@@ -435,7 +435,7 @@ fi
 
 4)
 
-FILE="/etc/profile.d/kevintech.sh"
+FILE="/etc/profile.d/benivps.sh"
 
 clear
 
@@ -444,14 +444,14 @@ echo -e "${WHITE}║                    🔄 AUTO INICIO                        
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-if [[ "$AUTO_START" == "OFF" ]]; then
+if  "$AUTO_START" == "OFF" ; then
 
     sed -i 's/AUTO_START=OFF/AUTO_START=ON/' "$CONFIG"
 
 cat > "$FILE" << EOF
 #!/bin/bash
-if [[ \$- == *i* ]]; then
-    menu
+if  \$- == *i* ; then
+    xmenu
 fi
 EOF
 
@@ -485,11 +485,11 @@ echo -e "${WHITE}║                📦 INSTALADOR DE PROTOCOLOS               
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-if [[ -f "$BASE/protocolos/menu.sh" ]]; then
+if  -f "$BASE/protocolos/menu.sh" ; then
 
     bash "$BASE/protocolos/menu.sh"
 
-elif [[ -f "$HOME/multi-script/protocolos/menu.sh" ]]; then
+elif  -f "$HOME/multi-script/protocolos/menu.sh" ; then
 
     mkdir -p "$BASE/protocolos"
 
@@ -535,13 +535,13 @@ case "$OP6" in
 
 clear
 
-echo -e "${RED}⚠️ Eliminando Kevin Tech Multi Script...${RESET}"
+echo -e "${RED}⚠️ Suppression de Beni VPS Panel...${RESET}"
 
 sleep 1
 
-rm -rf /etc/kevintech
-rm -f /usr/local/bin/menu
-rm -f /etc/profile.d/kevintech.sh
+rm -rf /etc/benivps
+rm -f /usr/local/bin/xmenu
+rm -f /etc/profile.d/benivps.sh
 
 echo ""
 echo -e "${GREEN}✅ Script eliminado correctamente.${RESET}"
@@ -565,7 +565,7 @@ echo -e "${CYAN}╚════════════════════�
 
 echo ""
 
-TMP="/tmp/kevintech_update"
+TMP="/tmp/benivps_update"
 
 rm -rf "$TMP"
 
@@ -574,17 +574,17 @@ echo -e "${CYAN}📥 Descargando actualización...${RESET}"
 sleep 1
 
 git clone \
-https://github.com/kevinaldaircama/multi-script.git \
+https://github.com/benifulgence6-pixel/multi-script.git \
 "$TMP" >/dev/null 2>&1
 
-if [[ $? -ne 0 ]]; then
+if  $? -ne 0 ; then
 
     echo ""
     echo -e "${RED}❌ No se pudo descargar la actualización.${RESET}"
 
     sleep 3
 
-    exec menu
+    exec xmenu
 
 fi
 
@@ -592,9 +592,9 @@ echo -e "${CYAN}📦 Instalando archivos...${RESET}"
 
 sleep 1
 
-cp -rf "$TMP"/* /etc/kevintech/
+cp -rf "$TMP"/* /etc/benivps/
 
-chmod -R +x /etc/kevintech
+chmod -R +x /etc/benivps
 
 echo -e "${CYAN}🧹 Limpiando archivos temporales...${RESET}"
 
@@ -609,13 +609,13 @@ echo -e "${WHITE}║                ✅ ACTUALIZACIÓN COMPLETADA               
 echo -e "${GREEN}╚══════════════════════════════════════════════════════════════╝${RESET}"
 
 echo ""
-echo -e "${GREEN}✔️ Kevin Tech Multi Script actualizado.${RESET}"
+echo -e "${GREEN}✔️ Beni VPS Panel actualizado.${RESET}"
 echo ""
 echo -e "${CYAN}🚀 Reiniciando panel...${RESET}"
 
 sleep 2
 
-exec menu
+exec xmenu
 
 ;;
 
@@ -625,7 +625,7 @@ echo -e "${RED}❌ Opción inválida.${RESET}"
 
 sleep 2
 
-exec menu
+exec xmenu
 
 ;;
 
@@ -640,7 +640,7 @@ esac
 clear
 
 echo ""
-echo -e "${GREEN}👋 Gracias por usar Kevin Tech Multi Script Premium.${RESET}"
+echo -e "${GREEN}👋 Gracias por usar Beni VPS Panel Premium.${RESET}"
 echo ""
 
 exit
